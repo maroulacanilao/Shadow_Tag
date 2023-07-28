@@ -5,20 +5,20 @@ using UnityEngine;
 public class MovementCollisionDetector : MonoBehaviour
 {
     [Header("Ground")]
-    [SerializeField] private Vector2 groundOffset;
-    [SerializeField] private float groundRadius;
+    [SerializeField] private Vector2[] groundOffsetArr;
+    [SerializeField] private float groundDist;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] [Tag] private string movingPlatformTag;
     [SerializeField] private bool updateGrounded = true;
 
     [Header("Edge")]
     [SerializeField] private Vector2 edgeGroundOffset;
-    [SerializeField] private float groundCheckDist;
+    [SerializeField] private float edgeGroundCheckDist = 0.05f;
     [SerializeField] private bool updateEdge = true;
 
     [Header("Wall")]
     [SerializeField] private Vector2 wallOffset;
-    [SerializeField] private float wallCheckDist;
+    [SerializeField] private float wallCheckDist = 0.05f;
     [SerializeField] private bool useExcludeLayer = true;
     [SerializeField] [ShowIf("useExcludeLayer")] LayerMask wallExcludeLayer;
     [SerializeField] [HideIf("useExcludeLayer")] LayerMask wallLayer;
@@ -54,7 +54,7 @@ public class MovementCollisionDetector : MonoBehaviour
 
     public bool IsOnEdge()
     {
-        return !Physics2D.Raycast(transform.position + owner.GetOffsetOrientation(edgeGroundOffset), Vector2.down, groundCheckDist, groundLayer);
+        return !Physics2D.Raycast(transform.position + owner.GetOffsetOrientation(edgeGroundOffset), Vector2.down, edgeGroundCheckDist, groundLayer);
     }
 
     public bool IsTouchingWall()
@@ -72,17 +72,26 @@ public class MovementCollisionDetector : MonoBehaviour
 
     public bool IsGrounded()
     {
-        var _col = Physics2D.OverlapCircle(transform.position + (Vector3) groundOffset, groundRadius, groundLayer);
-        if (!_col)
+        foreach (var _offset in groundOffsetArr)
         {
-            isGrounded = false;
-            isOnMovingPlatform = false;
-            return false;
+            var _hit = Physics2D.Raycast(transform.position + (Vector3) _offset, 
+                Vector2.down, edgeGroundCheckDist, groundLayer);
+            
+            if (!_hit.collider)
+            {
+                continue;
+            }
+            
+            var _col = _hit.collider;
+            isGrounded = true;
+            GroundTransform = _col.transform;
+            isOnMovingPlatform = _col.CompareTagHash(movingPlatformTagHash);
+            return true;
         }
-        isGrounded = true;
-        GroundTransform = _col.transform;
-        isOnMovingPlatform = _col.CompareTagHash(movingPlatformTagHash);
-        return true;
+        
+        isGrounded = false;
+        isOnMovingPlatform = false;
+        return false;
     }
 
     private void OnDrawGizmos()
@@ -90,14 +99,18 @@ public class MovementCollisionDetector : MonoBehaviour
         if (!showGizmo) return;
         var _pos = transform.position;
 
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(_pos + (Vector3) groundOffset, groundRadius);
-
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(_pos + owner.GetOffsetOrientation(edgeGroundOffset), Vector2.down * groundCheckDist);
+        Gizmos.DrawRay(_pos + owner.GetOffsetOrientation(edgeGroundOffset), Vector2.down * edgeGroundCheckDist);
 
         Gizmos.color = Color.magenta;
         var _dir = owner.localScale.x >0 ? Vector2.right : Vector2.left;
         Gizmos.DrawRay(_pos + owner.GetOffsetOrientation(wallOffset), _dir * wallCheckDist);
+        
+        Gizmos.color = Color.blue;
+
+        foreach (var _offset in groundOffsetArr)
+        {
+            Gizmos.DrawRay(transform.position + (Vector3) _offset ,Vector2.down * groundDist);
+        }
     }
 }

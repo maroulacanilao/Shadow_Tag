@@ -24,11 +24,13 @@ public abstract class UnitController : MonoBehaviour
     
     protected virtual void Update()
     {
+        if(Time.timeScale <= 0) return;
         StateMachine.StateUpdate();
     }
     
     protected virtual void FixedUpdate()
     {
+        if(Time.timeScale <= 0) return;
         StateMachine.StateFixedUpdate();
     }
 }
