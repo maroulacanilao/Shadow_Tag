@@ -16,7 +16,7 @@ namespace AI
 
         private void OnEnable()
         {
-            index = 0;
+            index = MovementRecorder.lastIndex;
         }
         
         private void FixedUpdate()

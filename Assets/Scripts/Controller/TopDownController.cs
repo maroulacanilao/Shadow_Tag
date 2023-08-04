@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Managers;
 using UnityEngine;
 
@@ -19,23 +17,20 @@ public class TopDownController : MonoBehaviour
     {
         var _input = InputManager.MoveDelta;
         
-        var _movement = _input.Raw;
+        var _rot = _input.Raw;
 
-        if (!isDiagonal && _movement.x != 0f && _movement.y != 0f)
+        if (!isDiagonal && _rot.x != 0f && _rot.y != 0f)
         {
-            _movement.x = 0f;
+            _rot.x = 0f;
         }
-
-        _movement = _movement.normalized;
-        rb.velocity = _movement * movementSpeed;
 
         // Rotate the character to face the movement direction
-        if (_movement != Vector2.zero)
+        if (_rot != Vector2.zero)
         {
-            var _angle = Mathf.Atan2(_movement.y, _movement.x) * Mathf.Rad2Deg;
+            var _angle = Mathf.Atan2(_rot.y, _rot.x) * Mathf.Rad2Deg;
             rb.rotation = _angle;
         }
+        
+        rb.velocity = transform.right * movementSpeed;
     }
-    
-    
 }

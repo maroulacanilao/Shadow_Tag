@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -40,7 +41,25 @@ namespace Managers
             score += additionalSore_;
             GameManager.OnUpdateScore.Invoke(score);
         }
-        
+
+        private void Update()
+        {
+            // if(playerRb.velocity.magnitude < 0.1f) return;
+            // timer += Time.deltaTime;
+            //
+            // if (timer < tickRate)
+            // {
+            //     multiplierTickCounter++;
+            //     timer = 0;
+            //     if(multiplierTickCounter >= multiplierTickRate)
+            //     {
+            //         multiplierTickCounter = 0;
+            //         scoreMultiplier++;
+            //     }
+            // }
+            // score =+ (int) (scoreMultiplier * Time.deltaTime);
+        }
+
         private IEnumerator ScoreTick()
         {
             var _waiter = new WaitForSeconds(tickRate);
@@ -54,7 +73,7 @@ namespace Managers
                 if(!enabled) yield break;
                 if(playerRb.velocity.magnitude < 0.1f) continue;
 
-                    multiplierTickCounter++;
+                multiplierTickCounter++;
                 if(multiplierTickCounter >= multiplierTickRate)
                 {
                     multiplierTickCounter = 0;

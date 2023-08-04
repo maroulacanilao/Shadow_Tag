@@ -18,14 +18,15 @@ namespace UI.ResultScreen
         [SerializeField] private GameObject highScoreIndicator;
         [SerializeField] private Button retryButton;
         [SerializeField] private Button exitButton;
+        [SerializeField] [NaughtyAttributes.Scene] private string mainMenuScene;
 
         private void Awake()
         {
             panel.SetActive(false);
             retryButton.onClick.AddListener(Retry);
-            exitButton.onClick.AddListener(Retry);
+            exitButton.onClick.AddListener(Exit);
         }
-        
+
         private void OnEnable()
         {
             GameManager.OnShadowCollide.AddListener(ShowResultScreen);
@@ -41,6 +42,11 @@ namespace UI.ResultScreen
             var _name = gameObject.scene.name;
             SceneManager.LoadScene(_name, LoadSceneMode.Single);
             Debug.Log($"Reload scene: {_name}");
+        }
+        
+        private void Exit()
+        {
+            SceneManager.LoadScene(mainMenuScene, LoadSceneMode.Single);
         }
 
         private void ShowResultScreen()

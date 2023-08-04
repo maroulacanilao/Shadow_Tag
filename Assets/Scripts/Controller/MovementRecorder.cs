@@ -16,6 +16,7 @@ namespace Controller
     {
         private Rigidbody2D rb;
         public static readonly List<MovementInfo> movementInfos = new List<MovementInfo>();
+        public static int lastIndex = 0;
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -25,6 +26,7 @@ namespace Controller
         private void OnEnable()
         {
             GameManager.OnPlayerFeed.AddListener(Clear);
+            lastIndex = 0;
         }
 
         private void OnDisable()
@@ -47,7 +49,7 @@ namespace Controller
         
         private void Clear(int param_)
         {
-            movementInfos.Clear();
+            lastIndex = movementInfos.Count - 1;
         }
     }
 }

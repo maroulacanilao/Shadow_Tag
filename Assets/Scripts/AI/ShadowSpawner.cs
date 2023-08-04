@@ -32,11 +32,21 @@ namespace AI
         
         private void OnPlayerFeedHandler(int additionalScore_)
         {
-            foreach (var shadow in shadows)
+            // foreach (var shadow in shadows)
+            // {
+            //     Destroy(shadow.gameObject);
+            // }
+            // shadows.Clear();
+            var _count = (int) (shadows.Count * 0.5f) - 1;
+            
+            for (int i = 0; i < _count; i++)
             {
-                Destroy(shadow.gameObject);
+                if(shadows.Count == 0) break;
+                
+                var _shadow = shadows[0];
+                shadows.RemoveAt(0);
+                Destroy(_shadow.gameObject);
             }
-            shadows.Clear();
             timer = 0f;
         }
 
@@ -49,7 +59,7 @@ namespace AI
             }
 
             timer = 0f;
-            var _pos = MovementRecorder.movementInfos[0].position;
+            var _pos = MovementRecorder.movementInfos[MovementRecorder.lastIndex].position;
             var _shadow = Instantiate(shadowPrefab, _pos, Quaternion.identity);
             
             shadows.Add(_shadow);
