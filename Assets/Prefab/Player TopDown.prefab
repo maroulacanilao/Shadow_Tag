@@ -48,8 +48,8 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 0.9297552, b: 0.7311321, a: 1}
+  m_FalloffIntensity: 0.8
+  m_Color: {r: 0.9528302, g: 0.85507524, b: 0.56181026, a: 1}
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
@@ -100,8 +100,8 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1.5204633
+  m_PointLightInnerRadius: 0.2
+  m_PointLightOuterRadius: 2.5
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -131,26 +131,27 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.00077819824
       value: 1
-      inSlope: -0.49325398
-      outSlope: -0.49325398
+      inSlope: -0.15796882
+      outSlope: -0.15796882
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.04914313
+      outWeight: 0.058456745
     - serializedVersion: 3
       time: 1
       value: 0.0023157373
-      inSlope: -0.0000012396953
-      outSlope: -0.0000012396953
+      inSlope: -2.3695235
+      outSlope: -2.3695235
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.04680181
+      inWeight: 0.035073992
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  lightIntensityMinMax: {x: 0.25, y: 1}
-  lightTime: 10
+  lightIntensityMinMax: {x: 0.5, y: 1}
+  lightOuterSizeMinMax: {x: 1.5, y: 2.5}
+  lightTime: 12
 --- !u!1 &1131754576805418302
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,8 +464,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5853154480834149623}
-  - component: {fileID: 8696040545087880762}
-  - component: {fileID: 7426432611070784145}
+  - component: {fileID: 4951589895570375351}
+  - component: {fileID: 1943426565420515397}
   m_Layer: 0
   m_Name: Trail
   m_TagString: Untagged
@@ -487,21 +488,7 @@ Transform:
   m_Father: {fileID: 1131754578037036000}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8696040545087880762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8570888098650181342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11694e47498832242923ba56e49cb7c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trailTime: 20
-  minDistance: 0.1
---- !u!96 &7426432611070784145
+--- !u!96 &4951589895570375351
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -542,8 +529,8 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Time: 5
+  m_SortingOrder: 0
+  m_Time: 15
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -551,8 +538,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.009559631
-        value: 0.0578537
+        time: 0
+        value: 0.02
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -564,9 +551,9 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 0.19607843}
-      key1: {r: 1, g: 1, b: 1, a: 0.78431374}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 0.37254903}
+      key1: {r: 1, g: 1, b: 0.9098039, a: 0.15686275}
+      key2: {r: 0, g: 0, b: 0, a: 0.15686275}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -582,7 +569,7 @@ TrailRenderer:
       ctime7: 0
       atime0: 0
       atime1: 65535
-      atime2: 0
+      atime2: 65535
       atime3: 0
       atime4: 0
       atime5: 0
@@ -600,3 +587,19 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &1943426565420515397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8570888098650181342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11694e47498832242923ba56e49cb7c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trailTime: 20
+  minDistance: 0.1
+  dashSegments: 1
+  gapSegments: 10

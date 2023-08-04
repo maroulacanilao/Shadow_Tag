@@ -1,47 +1,57 @@
 using System;
+using System.Collections.Generic;
 using Managers;
 using UnityEngine;
 
 public class TrailGenerator : MonoBehaviour
 {
     [SerializeField] private float trailTime = 20.0f;
-    [SerializeField] private float dotInterval = 0.2f;
     [SerializeField] private float minDistance = 0.1f;
+    [SerializeField] private int dashSegments = 1;
+    [SerializeField] private int gapSegments = 10;
 
-    private float timeSinceLastDot = 0f;
     private TrailRenderer trailRenderer;
     private Vector2 lastPosition;
+    private float dash_Timer;
+    private float wait_Timer;
+    private int currentSegment = 0;
+    private bool isDashing = true;
 
-    private void Awake()
+    private void Start()
     {
-        GameManager.OnPlayerFeed.AddListener(Clear);
         trailRenderer = GetComponent<TrailRenderer>();
         lastPosition = transform.position;
-    }
-
-    private void OnDestroy()
-    {
-        GameManager.OnPlayerFeed.RemoveListener(Clear);
+        trailRenderer.time = trailTime;
     }
 
     private void FixedUpdate()
     {
-        // Update the time since the last dot
-        timeSinceLastDot += Time.deltaTime;
+        float distanceMoved = Vector2.Distance(transform.position, lastPosition);
 
-        // If enough time has passed, add a dot to the trail
-        if (timeSinceLastDot >= dotInterval)
+        if (distanceMoved < minDistance) return;
+
+        if (isDashing)
         {
+            trailRenderer.emitting = true;
             trailRenderer.AddPosition(transform.position);
-            timeSinceLastDot = 0f; // Reset the timer
+
+            lastPosition = transform.position;
+            currentSegment++;
+
+            if (currentSegment < dashSegments) return;
+            
+            currentSegment = 0;
+            isDashing = false;
         }
-
-        // Fade out the oldest points in the trail
-        trailRenderer.time = trailTime;
-    }
-
-    private void Clear(int score_)
-    {
-        trailRenderer.Clear();
+        else
+        {
+            currentSegment++;
+            trailRenderer.emitting = false;
+            
+            if (currentSegment < gapSegments) return;
+            
+            currentSegment = 0;
+            isDashing = true;
+        }
     }
 }

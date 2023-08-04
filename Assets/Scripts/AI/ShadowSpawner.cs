@@ -37,7 +37,8 @@ namespace AI
             //     Destroy(shadow.gameObject);
             // }
             // shadows.Clear();
-            var _count = (int) (shadows.Count * 0.5f) - 1;
+            var _count = (int) (shadows.Count * 0.5f);
+            Debug.Log($"Num of shadows to Destroy: {_count}");
             
             for (int i = 0; i < _count; i++)
             {
