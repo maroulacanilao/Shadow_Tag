@@ -71,6 +71,15 @@ public partial class @PlatformInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""e4ec0a78-cdf9-4b95-8081-2ba29fea12e2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -227,6 +236,28 @@ public partial class @PlatformInput : IInputActionCollection2, IDisposable
                     ""action"": ""Grab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1a765b2-3a26-4f06-99e7-59993761c76a"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""01195020-d92d-43b3-8e29-7a7cce1e920d"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -240,6 +271,7 @@ public partial class @PlatformInput : IInputActionCollection2, IDisposable
         m_Platform_Dash = m_Platform.FindAction("Dash", throwIfNotFound: true);
         m_Platform_Attack = m_Platform.FindAction("Attack", throwIfNotFound: true);
         m_Platform_Grab = m_Platform.FindAction("Grab", throwIfNotFound: true);
+        m_Platform_Pause = m_Platform.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -304,6 +336,7 @@ public partial class @PlatformInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Platform_Dash;
     private readonly InputAction m_Platform_Attack;
     private readonly InputAction m_Platform_Grab;
+    private readonly InputAction m_Platform_Pause;
     public struct PlatformActions
     {
         private @PlatformInput m_Wrapper;
@@ -313,6 +346,7 @@ public partial class @PlatformInput : IInputActionCollection2, IDisposable
         public InputAction @Dash => m_Wrapper.m_Platform_Dash;
         public InputAction @Attack => m_Wrapper.m_Platform_Attack;
         public InputAction @Grab => m_Wrapper.m_Platform_Grab;
+        public InputAction @Pause => m_Wrapper.m_Platform_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Platform; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -337,6 +371,9 @@ public partial class @PlatformInput : IInputActionCollection2, IDisposable
                 @Grab.started -= m_Wrapper.m_PlatformActionsCallbackInterface.OnGrab;
                 @Grab.performed -= m_Wrapper.m_PlatformActionsCallbackInterface.OnGrab;
                 @Grab.canceled -= m_Wrapper.m_PlatformActionsCallbackInterface.OnGrab;
+                @Pause.started -= m_Wrapper.m_PlatformActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlatformActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlatformActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlatformActionsCallbackInterface = instance;
             if (instance != null)
@@ -356,6 +393,9 @@ public partial class @PlatformInput : IInputActionCollection2, IDisposable
                 @Grab.started += instance.OnGrab;
                 @Grab.performed += instance.OnGrab;
                 @Grab.canceled += instance.OnGrab;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -367,5 +407,6 @@ public partial class @PlatformInput : IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnGrab(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

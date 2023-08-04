@@ -21,7 +21,7 @@ public class TopDownController : MonoBehaviour
         
         var _movement = _input.Raw;
 
-        if (isDiagonal && _movement.x != 0f && _movement.y != 0f)
+        if (!isDiagonal && _movement.x != 0f && _movement.y != 0f)
         {
             _movement.x = 0f;
         }

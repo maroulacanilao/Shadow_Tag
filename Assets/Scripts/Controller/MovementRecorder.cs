@@ -9,14 +9,16 @@ namespace Controller
     {
         public Vector2 position;
         public Vector2 velocity;
+        public Quaternion rotation;
         public float time;
     }
     public class MovementRecorder : MonoBehaviour
     {
+        private Rigidbody2D rb;
         public static readonly List<MovementInfo> movementInfos = new List<MovementInfo>();
-
         private void Awake()
         {
+            rb = GetComponent<Rigidbody2D>();
             movementInfos.Clear();
         }
 
@@ -32,10 +34,13 @@ namespace Controller
 
         private void FixedUpdate()
         {
+            var _transform = transform;
+            
             movementInfos.Add(new MovementInfo
             {
-                position = transform.position,
-                velocity = GetComponent<Rigidbody2D>().velocity,
+                position = _transform.position,
+                velocity = rb.velocity,
+                rotation = _transform.rotation,
                 time = Time.time
             });
         }

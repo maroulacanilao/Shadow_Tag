@@ -30,6 +30,7 @@ namespace Managers
         public static readonly Evt<InputAction.CallbackContext> OnDashAction = new Evt<InputAction.CallbackContext>();
         public static readonly Evt<InputAction.CallbackContext> OnAttackAction = new Evt<InputAction.CallbackContext>();
         public static readonly Evt<InputAction.CallbackContext> OnGrabAction = new Evt<InputAction.CallbackContext>();
+        public static readonly Evt<InputAction.CallbackContext> OnPauseAction = new Evt<InputAction.CallbackContext>();
 
         #endregion
 
@@ -71,6 +72,10 @@ namespace Managers
         public void OnGrab(InputAction.CallbackContext context_)
         {
             OnGrabAction.Invoke(context_);
+        }
+        public void OnPause(InputAction.CallbackContext context)
+        {
+            OnPauseAction.Invoke(context);
         }
     }
 }
