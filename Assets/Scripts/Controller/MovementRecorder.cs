@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CustomHelpers;
 using Managers;
 using UnityEngine;
 
@@ -17,6 +18,8 @@ namespace Controller
         private Rigidbody2D rb;
         public static readonly List<MovementInfo> movementInfos = new List<MovementInfo>();
         public static int lastIndex = 0;
+        public static MovementInfo lastMovementIndex => movementInfos[lastIndex];
+        private Vector3 lastPosition;
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -37,14 +40,19 @@ namespace Controller
         private void FixedUpdate()
         {
             var _transform = transform;
+
+            var _position = _transform.position;
+            
+            if(_position.IsApproximatelyTo(lastPosition,0.01f)) return;
             
             movementInfos.Add(new MovementInfo
             {
-                position = _transform.position,
+                position = _position,
                 velocity = rb.velocity,
                 rotation = _transform.rotation,
                 time = Time.time
             });
+            lastPosition = _position;
         }
         
         private void Clear(int param_)

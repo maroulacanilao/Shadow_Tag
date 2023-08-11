@@ -98,5 +98,15 @@ namespace CustomHelpers
             float t = (f - fromMin) / (fromMax - fromMin);
             return Mathf.LerpUnclamped(toMin, toMax, t);
         }
+        
+        public static bool IsApproximatelyTo(this Vector2 vector, Vector2 other, float tolerance = 0.001f)
+        {
+            return Vector2.Distance(vector, other) <= tolerance;
+        }
+        
+        public static bool IsApproximatelyTo(this Vector3 vector, Vector3 other, float tolerance = 0.001f)
+        {
+            return Vector3.Distance(vector, other) <= tolerance;
+        }
     }
 }
