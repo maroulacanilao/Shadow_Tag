@@ -27,6 +27,7 @@ namespace Player.ControllerState
             controller.rb.gravityScale = 0;
             spriteRendTransform.localPosition = spriteRendTransform.localPosition.SetX(controller.wallSlideSpriteOffsetX);
             wallGrabTimer = 0;
+            StateMachine.CurrentControllerTypeState = ControllerTypeState.WallGrab;
         }
         
         public override void HandleInput()

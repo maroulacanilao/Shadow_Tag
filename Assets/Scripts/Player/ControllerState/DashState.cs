@@ -16,6 +16,7 @@ namespace Player.ControllerState
             base.Enter();
             controller.animator.SetTrigger(controller.dashHash);
             controller.StartCoroutine(Co_Dash());
+            StateMachine.CurrentControllerTypeState = ControllerTypeState.Dash;
         }
 
         IEnumerator Co_Dash()

@@ -17,6 +17,7 @@ namespace Player.ControllerState
             base.Enter();
             StateMachine.hasDashed = false;
             controller.animator.SetTrigger(controller.groundedHash);
+            StateMachine.CurrentControllerTypeState = ControllerTypeState.Grounded;
         }
     
         public override void HandleInput()

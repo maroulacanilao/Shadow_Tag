@@ -9,14 +9,14 @@ namespace AI
 {
     public class ShadowController : MonoBehaviour
     {
-        [SerializeField] Animator animator;
+        [SerializeField] protected Animator animator;
         [SerializeField] [NaughtyAttributes.AnimatorParam("animator")] private int isIdleHash;
 
-        public int index { get; private set; } = 0;
+        public int index { get; protected set; } = 0;
         private bool isBoosting = false;
         private float boostIntervalTimer;
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             index = MovementRecorder.lastIndex;
         }
@@ -38,31 +38,6 @@ namespace AI
             animator.SetBool(isIdleHash, _movementInfo.velocity.magnitude.IsApproximatelyTo(0));
             
             index++;
-
-            // if (isBoosting)
-            // {
-            //     index += 2;
-            //     isBoosting = false;
-            // }
-            // else
-            // {
-            //     boostIntervalTimer += Time.fixedDeltaTime;
-            //     if (boostIntervalTimer >= boostInterval)
-            //     {
-            //         isBoosting = true;
-            //         boostIntervalTimer = 0f;
-            //     }
-            //     index++;
-            // }
-            // skipCount++;
-            //
-            // var _interval = skipIntervalCurve.Evaluate((float)skipCount/skipIntervalMinMax.y).Remap(0,1,skipIntervalMinMax.y,skipIntervalMinMax.x);
-            // if(skipCount < Mathf.RoundToInt(_interval)) return;
-            // index++;
-            // skipCount = 0;
-            
-            // if (index >= MovementRecorder.movementInfos.Count)
-            
         }
 
         private void OnTriggerEnter2D(Collider2D other)

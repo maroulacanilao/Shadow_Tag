@@ -58,6 +58,7 @@ namespace AI
             }
             timer = 0f;
             shadowIndicator.SetPosition(MovementRecorder.lastMovementIndex);
+            // shadowIndicator.SetPosition(PlatformerMovementRecorder.lastMovementIndex.position);
         }
 
         private void Update()
@@ -71,6 +72,7 @@ namespace AI
 
             timer = 0f;
             var _pos = MovementRecorder.lastMovementIndex.position;
+            // var _pos = PlatformerMovementRecorder.lastMovementIndex.position;
             var _shadow = Instantiate(shadowPrefab, _pos, Quaternion.identity);
             
             if(!_shadow.TryGetComponent(out ShadowController _shadowController)) return; 

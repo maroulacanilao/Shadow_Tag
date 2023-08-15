@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 5775229477978964613}
   - component: {fileID: 5775229477978964615}
   - component: {fileID: 5775229477978964614}
-  - component: {fileID: 5775229477978964667}
   m_Layer: 7
   m_Name: Player Platformer
   m_TagString: Player
@@ -182,7 +181,7 @@ MonoBehaviour:
   jumpVelFallOff: 8
   jumpBufferTime: 0.1
   coyoteTime: 0.2
-  jumpMaxTime: 0.35
+  jumpMaxTime: 0.2
   <dashForce>k__BackingField: {x: 30, y: 12}
   <dashDuration>k__BackingField: 0.1
   <dashCooldown>k__BackingField: 0.5
@@ -215,8 +214,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.65, y: 1}
+  m_Offset: {x: 0.027995586, y: 0.013064504}
+  m_Size: {x: 0.5940088, y: 1.026129}
   m_Direction: 0
 --- !u!50 &5775229477978964614
 Rigidbody2D:
@@ -239,18 +238,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &5775229477978964667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5775229477978964610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ed15dda77607044d92b1e7415b6f58d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5775229478328264065
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,15 +313,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c67035539dedbd34fb2319586b8c5f7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundOffset: {x: 0, y: -0.3333}
-  groundRadius: 0.2
+  groundOffsetArr:
+  - {x: 0, y: -0.49}
+  - {x: 0.2, y: -0.49}
+  - {x: -0.2, y: -0.49}
+  groundDist: 0.025
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   movingPlatformTag: MovingPlatform
   updateGrounded: 1
   edgeGroundOffset: {x: 0.34, y: -0.47}
-  groundCheckDist: 0.05
+  edgeGroundCheckDist: 0.05
   updateEdge: 1
   wallOffset: {x: 0.286, y: 0.7}
   wallCheckDist: 0.05

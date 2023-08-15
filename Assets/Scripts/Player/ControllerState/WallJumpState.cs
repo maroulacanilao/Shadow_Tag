@@ -20,6 +20,7 @@ namespace Player.ControllerState
             StateMachine.facingLeft = !StateMachine.facingLeft;
             
             SetOrientation(StateMachine.facingLeft);
+            StateMachine.CurrentControllerTypeState = ControllerTypeState.Jump;
         }
         
         public override void HandleInput()

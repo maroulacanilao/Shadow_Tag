@@ -21,6 +21,7 @@ namespace Player.ControllerState
             controller.animator.SetTrigger(controller.jumpHash);
             rb.SetVelocity(rb.velocity.x, controller.jumpForce);
             jumpTimer = 0;
+            StateMachine.CurrentControllerTypeState = ControllerTypeState.Jump;
         }
 
         public override void HandleInput()
@@ -84,6 +85,7 @@ namespace Player.ControllerState
         {
             base.Enter();
             controller.animator.SetTrigger(controller.fallHash);
+            StateMachine.CurrentControllerTypeState = ControllerTypeState.Fall;
         }
 
         public override void HandleInput()

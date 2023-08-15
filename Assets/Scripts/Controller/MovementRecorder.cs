@@ -44,6 +44,7 @@ namespace Controller
             var _position = _transform.position;
             
             if(_position.IsApproximatelyTo(lastPosition,0.01f)) return;
+            // if(movementInfos.Exists(m  => m.position.IsApproximatelyTo(_position,0.01f))) return;
             
             movementInfos.Add(new MovementInfo
             {

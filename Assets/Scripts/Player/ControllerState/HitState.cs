@@ -15,6 +15,7 @@ namespace Player.ControllerState
             rb.ResetVelocity();
             rb.gravityScale = 0;
             controller.animator.SetTrigger(controller.hitHash);
+            StateMachine.CurrentControllerTypeState = ControllerTypeState.Hit;
         }
         
         public override void Exit()

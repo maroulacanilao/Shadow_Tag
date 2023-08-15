@@ -52,6 +52,8 @@ namespace Player
         #endregion
         
         private PlayerState CurrentPlayerState => CurrentState as PlayerState;
+
+        public ControllerTypeState CurrentControllerTypeState;
         
         public PlayerStateMachine(PlatformController controller_)
         {

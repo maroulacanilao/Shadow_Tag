@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 namespace Player.ControllerState
 {
+    public enum ControllerTypeState { Grounded, Jump, Fall, Dash, WallSlide, WallJump, Hit, WallGrab }
+    
     public abstract class PlayerState : UnitState
     {
         protected readonly PlayerStateMachine StateMachine;

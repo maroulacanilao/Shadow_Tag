@@ -19,5 +19,10 @@ namespace AI
             transform.position = info_.position;
             sprite.rotation = info_.rotation;
         }
+        
+        public void SetPosition(Vector3 position_)
+        {
+            transform.position = position_;
+        }
     }
 }

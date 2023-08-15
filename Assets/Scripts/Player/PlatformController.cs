@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using Player.ControllerState;
 using UnityEngine;
 
 namespace Player
@@ -96,6 +97,16 @@ namespace Player
         [field: SerializeField]  public string hitAnimEndEvent { get; private set; }
         
         #endregion
+
+        public ControllerTypeState controllerTypeState
+        {
+            get
+            {
+                var _playerStateMachine = StateMachine as PlayerStateMachine;
+                if(_playerStateMachine == null) return 0;
+                return _playerStateMachine.CurrentControllerTypeState;
+            }
+        }
 
         private void Awake()
         {
